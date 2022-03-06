@@ -1,0 +1,15 @@
+---
+  - name: Install Softwares
+    hosts: linux
+    remote_user: admin
+    become: true
+    tasks:
+      - name: Install a list of packages
+        ansible.builtin.package:
+          pkg:
+            - vim
+            - zabbix-agent
+            - apache2
+            - net-tools
+            - build-essential
+

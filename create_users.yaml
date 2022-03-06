@@ -1,0 +1,147 @@
+---
+# Infrastructure code 
+- name: Infrastructure
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+# Define your username and password here that you want to create on target hosts.
+    username_infrastructure: admininfra
+    userpass_infrastructure: "@adm1n1nfr@"
+    #userpass_infrastructure: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create user Infrastructure
+      ansible.builtin.user:
+        name: "{{ username_infrastructure }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_infrastructure | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Infrastructure
+      ansible.posix.authorized_key:
+        user: "{{ username_infrastructure }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/admininfra.pub') }}"
+
+# Sistemas code
+
+- name: Sistemas
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+  # Define your username and password here that you want to create on target hosts.
+    username_sistemas: sistemas
+    userpass_sistemas: P?t6(Xc$E/u}'fz/
+    #userpass_sistemas: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create user Sistemas
+      ansible.builtin.user:
+        name: "{{ username_sistemas }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_sistemas | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Sistemas
+      ansible.posix.authorized_key:
+        user: "{{ username_sistemas }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/sistemas.pub') }}"      
+
+# Projetos code
+
+- name: Projetos
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+  # Define your username and password here that you want to create on target hosts.
+    username_projetos: projetos
+    userpass_projetos: ePURy8G5q:B?qJW~
+    #userpass_projetos: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create User Projetos
+      ansible.builtin.user:
+        name: "{{ username_projetos }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_projetos | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Projetos
+      ansible.posix.authorized_key:
+        user: "{{ username_projetos }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/projetos.pub') }}"      
+
+# Analytics Services e Servers code
+- name: Analytics Services e Servers
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+  # Define your username and password here that you want to create on target hosts.
+    username_analytics: analytics
+    userpass_analytics: a])+Pc)2'}H?q6j-
+    #userpass_analytics: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create User Analytics
+      ansible.builtin.user:
+        name: "{{ username_analytics }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_analytics | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Analytics Services e Servers
+      ansible.posix.authorized_key:
+        user: "{{ username_analytics }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/analytics.pub') }}" 
+
+# Desenvolvimento
+- name: Desenvolvimento
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+  # Define your username and password here that you want to create on target hosts.
+    username_desenvolvimento: desenvolvimento
+    userpass_desenvolvimento: Z#P/gA8Xj2[VcU\W
+    #userpass_desenvolvimento: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create User Desenvolvimento
+      ansible.builtin.user:
+        name: "{{ username_desenvolvimento }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_desenvolvimento | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Desenvolvimento
+      ansible.posix.authorized_key:
+        user: "{{ username_desenvolvimento }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/desenvolvimento.pub') }}" 

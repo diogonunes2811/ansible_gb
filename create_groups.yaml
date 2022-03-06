@@ -1,0 +1,11 @@
+---
+- name: Create groups teams 
+  hosts: linux
+  remote_user: admin
+  become: true
+  tasks:
+    - name: Ensure group "infrastructure" exists
+      ansible.builtin.group:
+        name: infraestrutura
+        state: present
+        
