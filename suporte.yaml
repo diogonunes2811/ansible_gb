@@ -1,0 +1,40 @@
+# Suporte
+- name: Suporte
+  remote_user: admin
+  hosts: linux
+  become: true
+  gather_facts: false
+  vars:
+  # Define your username and password here that you want to create on target hosts.
+    username_suporte: suporte
+    userpass_suporte: Z#P/gA8Xj2[VcU\W
+    #userpass_desenvolvimento: "{{ lookup('password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
+    #groups:
+  tasks:
+    - name: Create User Suporte
+      ansible.builtin.user:
+        name: "{{ username_suporte }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass_suporte | password_hash('sha512') }}"
+        update_password: always
+        groups: sudo
+        append: yes
+
+    - name: Deploy SSH Public Key Suporte
+      ansible.posix.authorized_key:
+        user: "{{ username_suporte }}"
+        state: present
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible_gb/archives/suporte.pub') }}" 
+
+    - name: Add user to sudoers file
+      lineinfile:
+        path: /etc/sudoers
+        regexp: '^suporte'
+        line: 'suporte ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /home/suporte/downloads
+        state: directory

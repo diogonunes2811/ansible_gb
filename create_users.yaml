@@ -144,4 +144,4 @@
       ansible.posix.authorized_key:
         user: "{{ username_desenvolvimento }}"
         state: present
-        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/desenvolvimento.pub') }}" 
+        key: "{{ lookup('file', '/Users/diogo/Library/Mobile Documents/com~apple~CloudDocs/VSCODE/ansible/archives/desenvolvimento.pub') }}"
